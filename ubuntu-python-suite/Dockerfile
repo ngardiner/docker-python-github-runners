@@ -1,9 +1,12 @@
 FROM ubuntu:20.04
 
 ARG DEBIAN_FRONTEND=noninteractive
+ARG PYTHON_VERSION="3.4.10"
 ENV PYTHON_VERSION=${PYTHON_VERSION}
-ARG RUNNER_VERSION="2.280.1"
+ARG RUNNER_VERSION="2.278.0"
+ARG http_proxy="http://1.2.3.4"
 ENV http_proxy=${http_proxy}
+ARG https_proxy="http://1.2.3.4"
 ENV https_proxy=${https_proxy}
 
 RUN apt-get update -y && apt-get upgrade -y 
