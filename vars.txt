@@ -1,2 +1,5 @@
 USER=github_user
 PAT=github_pat
+REPO=TWCManager
+http_proxy=http://1.2.3.4:3128
+https_proxy=http://1.2.3.4:3128

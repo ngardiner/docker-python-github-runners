@@ -1,6 +1,6 @@
 RUN=docker run -d --env-file
 TAG=runner-image
-UBUNTU=cd ubuntu && docker build --tag
+UBUNTU=cd ubuntu-python-suite && docker build --tag
 VARS=vars.txt
 
 build:
