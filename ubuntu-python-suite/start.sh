@@ -4,8 +4,6 @@ TOKEN=`curl -s -u $USER:$PAT -X POST \
 	    -H "Accept: application/vnd.github.v3+json" \
      https://api.github.com/repos/$USER/$REPO/actions/runners/registration-token -o - | jq -r .token`
 
-echo $TOKEN
-
 # Verify the installed Python version
 #/home/docker/info.py
 
@@ -16,12 +14,15 @@ cd /home/docker/actions-runner
 
 cleanup() {
 	    echo "Removing runner..."
-	        ./config.sh remove --unattended --token ${TOKEN}
+	    TOKEN=`curl -s -u $USER:$PAT -X POST \
+	     -H "Accept: application/vnd.github.v3+json" \
+	     https://api.github.com/repos/$USER/$REPO/actions/runners/registration-token -o - | jq -r .token`
+
+	    ./config.sh remove --unattended --token ${TOKEN}
 	}
 
+trap 'cleanup; exit 0' EXIT
 trap 'cleanup; exit 130' INT
 trap 'cleanup; exit 143' TERM
 
 ./run.sh --once & wait $!
-
-cleanup;
